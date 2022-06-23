@@ -53,4 +53,4 @@ let extractRandomNumbers = setInterval(function () {
   const array2 = [42, 23, 1, 7, 12, 99];
   const random = Math.floor(Math.random() * array2.length);
   console.log(array2[random]);
-}, 2000);
+}, 1000);
