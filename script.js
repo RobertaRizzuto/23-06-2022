@@ -28,14 +28,18 @@
 
 (function () {
   const showTime = () => {
-    console.clear();
-    console.log(new Date().getHours() + ":" + new Date().getMinutes());
+    const time =
+      new Date().getHours() +
+      ":" +
+      new Date().getMinutes() +
+      ":" +
+      new Date().getSeconds();
 
     document.body.innerHTML = `
-    <h1>${new Date().getHours() + ":" + new Date().getMinutes()}</h1>
+    <h1>${time}</h1>
   `;
   };
-  //setInterval(showTime, 1000); commentato per evitare il console.clear del resto
+  setInterval(showTime, 1000); 
 })();
 
 //dato un array [42, 23, 1, 7, 12, 99] estraiamo ogni secondo,
@@ -43,14 +47,28 @@
 //Cancelliamo l'interval quando avremo pescato tutti i numeri possibili.
 //tip: Contiamo quante volte abbiamo fatto parte l'intervallo
 
-
-let timesRun = 0;
-let extractRandomNumbers = setInterval(function () {
-  timesRun += 1;
-  if (timesRun === 6) {
-    clearInterval(extractRandomNumbers);
-  }
+(function () {
   const array2 = [42, 23, 1, 7, 12, 99];
-  const random = Math.floor(Math.random() * array2.length);
-  console.log(array2[random]);
-}, 1000);
+  const extractNumbers = () => {
+    const random = Math.floor(Math.random() * array2.length);
+    console.log(array2[random]);
+    array2.splice(random, 1);
+  };
+  const endInterval = () => clearInterval(timerId);
+  const timerId = setInterval(extractNumbers, 1000);
+  setTimeout(endInterval, 1000 * array2.length);
+})();
+
+// let timesRun = 0;
+// let extractRandomNumbers = setInterval(function () {
+//   const array2 = [42, 23, 1, 7, 12, 99];
+//   timesRun += 1;
+
+//   if (timesRun === array2.length) {
+//     clearInterval(extractRandomNumbers);
+//   }
+
+//   const random = Math.floor(Math.random() * array2.length);
+//   array2.splice(random, 1);
+//   console.log(array2[random]);
+// }, 1000); ---> da risolvere
